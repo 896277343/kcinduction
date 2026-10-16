@@ -15,7 +15,7 @@ type SuccessPageProps = {
 export const metadata: Metadata = {
   title: `Inquiry Status | ${siteConfig.site_name}`,
   description:
-    "View the status of your SF6 product inquiry submission and continue browsing our product catalog.",
+    "View the status of your induction heating solution inquiry.",
   alternates: {
     canonical: `${siteConfig.site_domain}/inquiry/success`,
   },
@@ -41,16 +41,16 @@ export default async function InquirySuccessPage({
   const isSuccess = status !== "error";
 
   return (
-    <div className="min-h-screen bg-gray-50 py-20">
+    <div className="min-h-screen bg-[#07111b] py-24 text-white">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl bg-white p-8 shadow-sm sm:p-10">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+        <div className="rounded-2xl border border-white/10 bg-[#0b1825] p-8 shadow-2xl sm:p-10">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-orange-300">
             Inquiry {isSuccess ? "Received" : "Needs Attention"}
           </p>
-          <h1 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
+          <h1 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
             {isSuccess ? "Thank you for your inquiry" : "We could not send your inquiry"}
           </h1>
-          <p className="mb-8 text-base leading-7 text-gray-600 sm:text-lg">
+          <p className="mb-8 text-base leading-7 text-slate-300 sm:text-lg">
             {isSuccess
               ? product
                 ? `Your request for ${product} has been submitted successfully. Our team will review it and get back to you soon.`
@@ -60,31 +60,31 @@ export default async function InquirySuccessPage({
                 : "We could not submit your request just now. Please go back and try again, or contact us directly by email or phone."}
           </p>
 
-          <div className="grid gap-4 rounded-xl bg-gray-50 p-5 text-sm text-gray-700 sm:grid-cols-2">
+          <div className="grid gap-4 rounded-xl border border-white/10 bg-white/[.04] p-5 text-sm text-slate-300 sm:grid-cols-2">
             <div>
-              <p className="mb-1 font-semibold text-gray-900">Email</p>
+              <p className="mb-1 font-semibold text-white">Email</p>
               <p>{siteConfig.contact.email}</p>
             </div>
             <div>
-              <p className="mb-1 font-semibold text-gray-900">Phone</p>
+              <p className="mb-1 font-semibold text-white">Phone</p>
               <p>{siteConfig.contact.phone}</p>
             </div>
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             {productSlug ? (
-              <Button asChild className="bg-blue-800 text-white hover:bg-blue-700">
+              <Button asChild className="bg-orange-500 text-slate-950 hover:bg-orange-400">
                 <Link href={`/products/${productSlug}`}>Back to {product ?? "Product"}</Link>
               </Button>
             ) : (
-              <Button asChild className="bg-blue-800 text-white hover:bg-blue-700">
+              <Button asChild className="bg-orange-500 text-slate-950 hover:bg-orange-400">
                 <Link href="/products">Back to Products</Link>
               </Button>
             )}
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
               <Link href="/products">Continue Browsing</Link>
             </Button>
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
               <Link href="/contact">Open Contact Page</Link>
             </Button>
           </div>

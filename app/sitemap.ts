@@ -12,22 +12,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/",
     "/about",
     "/contact",
-    "/sf6-calculator",
     "/products",
-    "/products/mobile-sf6-vacuum-pump-unit",
-    "/products/sf6-gas-analyzer",
-    "/products/sf6-gas-filling-cart",
-    "/products/sf6-gas-filling-kit",
-    "/products/sf6-gas-fittings",
-    "/products/sf6-leak-detector",
-    "/products/sf6-regeneration-system",
-    "/products/sf6-room-monitor",
-    "/products/sf6-service-carts",
-    "/projects",
-    "/projects/sf6-gas-handling-for-underground-substation",
-    "/projects/sf6-use-for-gas-insulated-switchgear-manufacturers",
-    "/projects/ultra-high-voltage-sf6-handling-equipment",
-    "/projects/sf6-gas-handling-and-regeneration-base",
+    "/fifth-generation-digital-induction-heating-power-supply",
+    "/solutions",
+    "/industrial-induction-heating-systems",
+    "/custom-induction-heating-lines",
+    "/induction-forging-equipment",
+    "/induction-pipe-heating",
+    "/induction-pipe-bending-machine",
+    "/induction-hardening-machine",
+    "/induction-brazing-system",
+    "/induction-heating-system-comparison",
     "/posts",
   ] as const;
 
@@ -35,22 +30,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/": "2026-05-10",
     "/about": "2026-05-10",
     "/contact": "2026-05-10",
-    "/sf6-calculator": "2026-06-09",
     "/products": "2026-05-10",
-    "/products/mobile-sf6-vacuum-pump-unit": "2026-05-10",
-    "/products/sf6-gas-analyzer": "2026-05-10",
-    "/products/sf6-gas-filling-cart": "2026-05-10",
-    "/products/sf6-gas-filling-kit": "2026-05-10",
-    "/products/sf6-gas-fittings": "2026-05-10",
-    "/products/sf6-leak-detector": "2026-05-10",
-    "/products/sf6-regeneration-system": "2026-05-10",
-    "/products/sf6-room-monitor": "2026-05-10",
-    "/products/sf6-service-carts": "2026-05-10",
-    "/projects": "2026-05-10",
-    "/projects/sf6-gas-handling-for-underground-substation": "2026-05-10",
-    "/projects/sf6-use-for-gas-insulated-switchgear-manufacturers": "2026-05-10",
-    "/projects/ultra-high-voltage-sf6-handling-equipment": "2026-05-10",
-    "/projects/sf6-gas-handling-and-regeneration-base": "2026-05-10",
+    "/fifth-generation-digital-induction-heating-power-supply": "2026-10-16",
+    "/solutions": "2026-10-15",
+    "/industrial-induction-heating-systems": "2026-10-15",
+    "/custom-induction-heating-lines": "2026-10-15",
+    "/induction-forging-equipment": "2026-10-15",
+    "/induction-pipe-heating": "2026-10-15",
+    "/induction-pipe-bending-machine": "2026-10-15",
+    "/induction-hardening-machine": "2026-10-15",
+    "/induction-brazing-system": "2026-10-15",
+    "/induction-heating-system-comparison": "2026-10-15",
     "/posts": "2026-05-10",
   };
 
@@ -66,9 +56,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority:
       path === "/"
         ? 1
-        : path === "/products" || path === "/projects"
+        : path === "/products" || path === "/solutions"
           ? 0.9
-          : path.startsWith("/products/")
+          : path.startsWith("/products/") || path.includes("induction-")
             ? 0.8
             : 0.7,
   }));

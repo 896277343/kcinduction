@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Menu, ArrowRightSquare } from "lucide-react";
 
-import { mainMenu, contentMenu } from "@/menu.config";
+import { mainMenu, contentMenu, menuLabel } from "@/menu.config";
 import { siteConfig } from "@/site.config";
 
 export function MobileNav() {
@@ -26,13 +26,13 @@ export function MobileNav() {
                   href={href}
                   className="block rounded-md px-2 py-2.5 text-base text-slate-900 hover:bg-slate-50"
                 >
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                  {menuLabel(key)}
                 </Link>
               ))}
             </div>
           </div>
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Blog Menu</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">KC Induction</h3>
             <div className="mt-3 space-y-1 border-t pt-3">
               {Object.entries(contentMenu).map(([key, href]) => (
                 <Link
@@ -40,7 +40,7 @@ export function MobileNav() {
                   href={href}
                   className="block rounded-md px-2 py-2.5 text-base text-slate-900 hover:bg-slate-50"
                 >
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                  {menuLabel(key)}
                 </Link>
               ))}
             </div>

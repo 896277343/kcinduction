@@ -44,3 +44,7 @@ next-env.d.ts
 .claude
 .factory
 RAILWAY-SETUP.md
+
+# Local source photography; optimized web assets are committed under public/images/kc.
+/pics/company/
+/pics/pics/

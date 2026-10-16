@@ -140,3 +140,13 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    .section-kicker {
+        @apply text-xs font-bold tracking-[0.2em] text-orange-600;
+    }
+
+    .section-title {
+        @apply text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl lg:text-6xl;
+    }
+}

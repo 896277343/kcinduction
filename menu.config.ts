@@ -1,16 +1,25 @@
 // Define the menu items
 export const mainMenu = {
-  home: "/",
   products: "/products",
-  tools: "/sf6-calculator",
-  blog: "/posts",
-  projects: "/projects",
-  about: "/about",
-  contact: "/contact",
+  solutions: "/solutions",
+  whyInduction: "/#why-induction",
+  whyUs: "/why-us",
+  industries: "/#industries",
+  contact: "/#quote",
 };
 
 export const contentMenu = {
-  categories: "/posts/categories",
-  tags: "/posts/tags",
-  authors: "/posts/authors",
+  home: "/",
+  products: "/products",
+  fifthGeneration: "/fifth-generation-digital-induction-heating-power-supply",
+  contact: "/contact",
 };
+
+export const menuLabel = (key: string) =>
+  key === "whyInduction"
+    ? "Why Induction"
+    : key === "whyUs"
+      ? "Why Us"
+      : key === "fifthGeneration"
+        ? "5th Generation"
+        : key.charAt(0).toUpperCase() + key.slice(1);

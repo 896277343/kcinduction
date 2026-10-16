@@ -31,7 +31,13 @@ const nextConfig: NextConfig = {
     })),
   },
   async redirects() {
-    return [];
+    return [
+      { source: "/medium-frequency", destination: "/industrial-induction-heating-systems", permanent: true },
+      { source: "/induction-heat-treatment-system", destination: "/custom-induction-heating-lines", permanent: true },
+      { source: "/product/automatic-induction-forging-equipment", destination: "/induction-forging-equipment", permanent: true },
+      { source: "/product/induction-pipe-bending-machine", destination: "/induction-pipe-bending-machine", permanent: true },
+      { source: "/quenching-and-tempering-system", destination: "/induction-hardening-machine", permanent: true },
+    ];
   },
 };
 

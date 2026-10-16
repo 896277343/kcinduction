@@ -23,26 +23,26 @@ type SiteConfig = {
 };
 
 export const siteConfig: SiteConfig = {
-  site_name: "SF6 in Switchgear",
-  site_description: "SF6 Gas Solution - Full Lifecycle of SF6 Gas Solution",
-  site_domain: "https://sf6inswitchgear.com",
+  site_name: "KC Induction",
+  site_description: "Self-developed fifth-generation digital induction heating power supplies with real-time power tracking, energy monitoring and process visibility from 0.1 to 1000 kHz.",
+  site_domain: "https://www.kc-induction.com",
   brand: {
-    legalName: "SF6 in Switchgear",
-    logoPath: "/logo.svg",
-    logoUrl: "https://sf6inswitchgear.com/logo.svg",
+    legalName: "Zhengzhou Kechuang Electronics Co., Ltd.",
+    logoPath: "/images/kc/logo.webp",
+    logoUrl: "/images/kc/logo.webp",
     socialLinks: [],
   },
   contact: {
-    phone: "+86 371 68988008",
-    email: "sales@sf6inswitchgear.com",
-    address: "300000+ square meters industrial park",
+    phone: "+86 139 3710 9134",
+    email: "sales@kc-induction.com",
+    address: "Building 21, Liandong International Enterprise Port, Zhengzhou, Henan, China",
     hoursLong: "Monday - Friday: 9:00 AM - 6:00 PM",
     hoursShort: "Mon-Fri: 9:00-18:00",
   },
   footer: {
-    copyrightName: "SF6 in Switchgear",
-    copyrightYears: "2025-present",
+    copyrightName: "KC Induction",
+    copyrightYears: "2026",
     summary:
-      "We are a professional R&D and manufacturing factory focusing on SF6 gas full lifecycle management, supplying high-quality products including SF6 gas leakage detection sensors, real-time monitoring systems, SF6 recovery & purification equipment, and gas refilling devices, while delivering one-stop eco-friendly SF6 recycling and smart substation safety solutions for the global power energy industry.",
+      "Application-led induction heating systems for heat treatment, brazing, forging, melting and automated production lines.",
   },
 };

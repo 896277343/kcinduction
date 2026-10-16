@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | " + siteConfig.site_name,
   },
   description: siteConfig.site_description,
-  keywords: ["SF6 gas", "SF6 equipment", "SF6 leak detector", "SF6 gas analyzer", "SF6 gas handling", "SF6 regeneration", "SF6 gas management"],
+  keywords: ["digital induction heating power supply", "induction heating energy monitoring", "induction heating", "induction heating machine", "induction heating solutions", "induction brazing", "induction hardening", "induction forging"],
   authors: [{ name: siteConfig.brand.legalName }],
   metadataBase: new URL(siteConfig.site_domain),
   openGraph: {
