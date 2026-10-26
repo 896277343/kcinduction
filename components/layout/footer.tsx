@@ -15,9 +15,9 @@ export function Footer() {
               <Image
                 src={siteConfig.brand.logoPath}
                 alt="Logo"
-                width={132}
-                height={48}
-                className="brightness-0 invert"
+                width={210}
+                height={68}
+                className="h-14 w-auto"
               />
             </Link>
             <div className="space-y-3">

@@ -30,9 +30,9 @@ export function Nav({ className, children, id }: NavProps) {
             src={siteConfig.brand.logoPath}
             alt={`${siteConfig.site_name} Logo`}
             loading="eager"
-            width={118}
-            height={44}
-            className="h-10 w-auto brightness-0 invert"
+            width={190}
+            height={60}
+            className="h-11 w-auto sm:h-12"
           />
           <span className="sr-only">{siteConfig.site_name}</span>
         </Link>

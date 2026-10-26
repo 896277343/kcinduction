@@ -28,8 +28,8 @@ export const siteConfig: SiteConfig = {
   site_domain: "https://www.kc-induction.com",
   brand: {
     legalName: "Zhengzhou Kechuang Electronics Co., Ltd.",
-    logoPath: "/images/kc/logo.webp",
-    logoUrl: "/images/kc/logo.webp",
+    logoPath: "/images/kc/logo-color-dark.webp",
+    logoUrl: "/images/kc/logo-color-dark.webp",
     socialLinks: [],
   },
   contact: {
