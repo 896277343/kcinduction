@@ -26,8 +26,12 @@ const productCategories = [
 
 const fieldClass = "mt-2 min-h-12 w-full rounded-lg border border-slate-300 bg-white px-4 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20";
 
-export default async function ContactPage({ searchParams }: { searchParams?: Promise<{ message?: string }> }) {
-  const message = (await searchParams)?.message ?? "";
+export default async function ContactPage({ searchParams }: { searchParams?: Promise<{ message?: string; product?: string; source?: string }> }) {
+  const resolvedSearchParams = await searchParams;
+  const message = resolvedSearchParams?.message ?? "";
+  const requestedProduct = resolvedSearchParams?.product ?? "";
+  const selectedProduct = productCategories.includes(requestedProduct) ? requestedProduct : "";
+  const inquirySource = (resolvedSearchParams?.source ?? "/contact").slice(0, 160);
 
   return <main className="bg-[#07111b] text-white">
     <Script id="contact-schema" type="application/ld+json">{JSON.stringify({ "@context": "https://schema.org", "@type": "ContactPage", name: `Contact ${siteConfig.brand.legalName}`, url: `${siteConfig.site_domain}/contact`, mainEntity: { "@type": "Organization", name: siteConfig.brand.legalName, email: siteConfig.contact.email, telephone: siteConfig.contact.phone, address: siteConfig.contact.address } })}</Script>
@@ -43,7 +47,8 @@ export default async function ContactPage({ searchParams }: { searchParams?: Pro
 
           <form method="POST" action="/api/inquiry" className="mt-9 space-y-6" suppressHydrationWarning>
             <input type="hidden" name="from_company" value={siteConfig.brand.legalName} />
-            <input type="hidden" name="referer" value={`${siteConfig.site_domain}/contact`} />
+            <input type="hidden" name="referer" value={`${siteConfig.site_domain}${inquirySource.startsWith("/") ? inquirySource : "/contact"}`} />
+            <input type="hidden" name="landing_page" value={inquirySource} />
             <input type="hidden" name="success_path" value="/inquiry/success" />
             <input type="hidden" name="failure_path" value="/inquiry/success" />
             <input type="hidden" name="product_slug" value="induction-heating-solution" />
@@ -57,7 +62,7 @@ export default async function ContactPage({ searchParams }: { searchParams?: Pro
 
             <label className="block text-sm font-semibold text-slate-700">Phone / WhatsApp<input type="tel" name="phone" autoComplete="tel" className={fieldClass} placeholder="Include country code" /></label>
 
-            <label className="block text-sm font-semibold text-slate-700">Product or solution <span className="text-orange-600">*</span><select name="product_name" required defaultValue="" className={`${fieldClass} appearance-none pr-10`}><option value="" disabled>Select a product category</option>{productCategories.map((category) => <option key={category} value={category}>{category}</option>)}</select></label>
+            <label className="block text-sm font-semibold text-slate-700">Product or solution <span className="text-orange-600">*</span><select name="product_name" required defaultValue={selectedProduct} className={`${fieldClass} appearance-none pr-10`}><option value="" disabled>Select a product category</option>{productCategories.map((category) => <option key={category} value={category}>{category}</option>)}</select></label>
 
             <label className="block text-sm font-semibold text-slate-700">Project details <span className="text-orange-600">*</span><textarea name="content" required rows={7} defaultValue={message} className={`${fieldClass} min-h-44 py-3 leading-7`} placeholder="Material, part dimensions, heating area, target temperature, cycle time and production rate..." /></label>
 

@@ -6,6 +6,17 @@ import type { SolutionPage } from "@/lib/solution-pages";
 import { siteConfig } from "@/site.config";
 
 export function SolutionLanding({ page }: { page: SolutionPage }) {
+  const contactProductBySlug: Record<string, string> = {
+    "industrial-induction-heating-systems": "Not sure — recommend a solution",
+    "custom-induction-heating-lines": "Custom automated heating line",
+    "induction-forging-equipment": "Induction forging & forming",
+    "induction-pipe-heating": "Pipe heating, preheating & PWHT",
+    "induction-pipe-bending-machine": "Pipe heating, preheating & PWHT",
+    "induction-hardening-machine": "Induction hardening & heat treatment",
+    "induction-brazing-system": "Induction brazing & joining",
+    "induction-heating-system-comparison": "Not sure — recommend a solution",
+  };
+  const contactHref = `/contact?product=${encodeURIComponent(contactProductBySlug[page.slug] ?? "Not sure — recommend a solution")}&source=${encodeURIComponent(`/${page.slug}`)}`;
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -29,7 +40,7 @@ export function SolutionLanding({ page }: { page: SolutionPage }) {
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/35 bg-orange-400/10 px-4 py-2 text-xs font-bold tracking-[.16em] text-orange-300 backdrop-blur"><Zap className="h-4 w-4" />{page.eyebrow}</div>
             <h1 className="mt-7 text-5xl font-semibold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-[5rem]">{page.title}</h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">{page.lead}</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row"><Link href="#project" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-orange-500 px-7 font-semibold text-slate-950 hover:bg-orange-400">Discuss your application <ArrowRight className="h-5 w-5" /></Link><Link href="/products" className="inline-flex min-h-14 items-center justify-center rounded-md border border-white/20 bg-white/5 px-7 font-semibold backdrop-blur hover:bg-white/10">Explore digital power supplies</Link></div>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row"><Link href={contactHref} className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-orange-500 px-7 font-semibold text-slate-950 hover:bg-orange-400">Discuss your application <ArrowRight className="h-5 w-5" /></Link><Link href="/products" className="inline-flex min-h-14 items-center justify-center rounded-md border border-white/20 bg-white/5 px-7 font-semibold backdrop-blur hover:bg-white/10">Explore digital power supplies</Link></div>
           </div>
         </div>
       </section>
@@ -71,7 +82,7 @@ export function SolutionLanding({ page }: { page: SolutionPage }) {
         <div className="mx-auto max-w-5xl px-5 sm:px-8"><div className="text-center"><p className="section-kicker">TECHNICAL QUESTIONS</p><h2 className="section-title mx-auto mt-4">Before we recommend a system.</h2></div><div className="mt-12 divide-y divide-slate-200 border-y border-slate-200">{page.questions.map((item) => <details key={item.question} className="group py-6"><summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-semibold marker:content-none">{item.question}<span className="text-2xl font-light text-orange-600 transition group-open:rotate-45">+</span></summary><p className="max-w-3xl pt-4 leading-7 text-slate-600">{item.answer}</p></details>)}</div></div>
       </section>
 
-      <section id="project" className="relative overflow-hidden py-24"><div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_50%,rgba(249,115,22,.2),transparent_34%)]" /><div className="relative mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_.85fr] lg:items-center lg:px-10"><div><p className="section-kicker">START WITH THE WORKPIECE</p><h2 className="section-title mt-4 max-w-3xl text-white">Tell us what needs to be heated—and what must happen next.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">Send the part drawing, material, target temperature, heated area and cycle time. Our engineers will recommend a practical starting point for power, frequency and coil design.</p></div><div className="rounded-2xl border border-white/10 bg-white/[.055] p-7 shadow-2xl backdrop-blur sm:p-9"><div className="text-sm font-semibold tracking-wider text-orange-300">REQUEST A TECHNICAL REVIEW</div><div className="mt-6 space-y-3"><a href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(page.primaryKeyword + " project")}`} className="flex min-h-14 items-center justify-center gap-2 rounded-md bg-orange-500 px-6 font-semibold text-slate-950 hover:bg-orange-400">Email project details <ArrowRight className="h-5 w-5" /></a><Link href="/products" className="flex min-h-14 items-center justify-center rounded-md border border-white/15 px-6 font-semibold hover:bg-white/5">Review power-supply range</Link></div><div className="mt-7 border-t border-white/10 pt-6 text-sm leading-7 text-slate-400"><span className="text-slate-500">Direct:</span> {siteConfig.contact.phone}<br /><span className="text-slate-500">Email:</span> {siteConfig.contact.email}</div></div></div></section>
+      <section id="project" className="relative overflow-hidden py-24"><div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_50%,rgba(249,115,22,.2),transparent_34%)]" /><div className="relative mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_.85fr] lg:items-center lg:px-10"><div><p className="section-kicker">START WITH THE WORKPIECE</p><h2 className="section-title mt-4 max-w-3xl text-white">Tell us what needs to be heated—and what must happen next.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">Send the part drawing, material, target temperature, heated area and cycle time. Our engineers will recommend a practical starting point for power, frequency and coil design.</p></div><div className="rounded-2xl border border-white/10 bg-white/[.055] p-7 shadow-2xl backdrop-blur sm:p-9"><div className="text-sm font-semibold tracking-wider text-orange-300">REQUEST A TECHNICAL REVIEW</div><div className="mt-6 space-y-3"><Link href={contactHref} className="flex min-h-14 items-center justify-center gap-2 rounded-md bg-orange-500 px-6 font-semibold text-slate-950 hover:bg-orange-400">Send project requirements <ArrowRight className="h-5 w-5" /></Link><Link href="/products" className="flex min-h-14 items-center justify-center rounded-md border border-white/15 px-6 font-semibold hover:bg-white/5">Review power-supply range</Link></div><div className="mt-7 border-t border-white/10 pt-6 text-sm leading-7 text-slate-400"><span className="text-slate-500">Direct:</span> {siteConfig.contact.phone}<br /><span className="text-slate-500">Email:</span> {siteConfig.contact.email}</div></div></div></section>
     </main>
   );
 }

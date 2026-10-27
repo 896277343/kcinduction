@@ -32,11 +32,26 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/medium-frequency", destination: "/industrial-induction-heating-systems", permanent: true },
-      { source: "/induction-heat-treatment-system", destination: "/custom-induction-heating-lines", permanent: true },
+      { source: "/medium-frequency", destination: "/products#frequency", permanent: false },
+      { source: "/induction-heat-treatment-system", destination: "/solutions", permanent: false },
       { source: "/product/automatic-induction-forging-equipment", destination: "/induction-forging-equipment", permanent: true },
       { source: "/product/induction-pipe-bending-machine", destination: "/induction-pipe-bending-machine", permanent: true },
       { source: "/quenching-and-tempering-system", destination: "/induction-hardening-machine", permanent: true },
+      { source: "/products/sf6-leak-detector", destination: "/products", permanent: true },
+      { source: "/products/sf6-room-monitor", destination: "/products", permanent: true },
+      { source: "/products/sf6-gas-analyzer", destination: "/products", permanent: true },
+      { source: "/products/sf6-gas-filling-cart", destination: "/products", permanent: true },
+      { source: "/products/sf6-gas-filling-kit", destination: "/products", permanent: true },
+      { source: "/products/sf6-gas-fittings", destination: "/products", permanent: true },
+      { source: "/products/sf6-service-carts", destination: "/products", permanent: true },
+      { source: "/products/sf6-regeneration-system", destination: "/products", permanent: true },
+      { source: "/products/mobile-sf6-vacuum-pump-unit", destination: "/products", permanent: true },
+      { source: "/sf6-calculator", destination: "/products", permanent: true },
+      { source: "/projects", destination: "/solutions", permanent: true },
+      { source: "/projects/sf6-gas-handling-and-regeneration-base", destination: "/solutions", permanent: true },
+      { source: "/projects/sf6-gas-handling-for-underground-substation", destination: "/solutions", permanent: true },
+      { source: "/projects/sf6-use-for-gas-insulated-switchgear-manufacturers", destination: "/solutions", permanent: true },
+      { source: "/projects/ultra-high-voltage-sf6-handling-equipment", destination: "/solutions", permanent: true },
     ];
   },
 };

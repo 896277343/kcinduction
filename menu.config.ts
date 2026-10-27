@@ -17,7 +17,7 @@ export const contentMenu = {
 
 export const menuLabel = (key: string) =>
   key === "whyInduction"
-    ? "Why Induction"
+    ? "Why Use Induction"
     : key === "whyUs"
       ? "Why Us"
       : key === "fifthGeneration"

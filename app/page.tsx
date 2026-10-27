@@ -6,7 +6,7 @@ import { ArrowRight, Check, ChevronRight, CircuitBoard, Factory, Flame, Gauge, L
 import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "Industrial Induction Heating Solutions | 0.1–1000 kHz | 20–1000 kW",
+  title: "Industrial Induction Heating Equipment Manufacturer | Up to 2000 kW",
   description: "Engineered induction heating solutions for brazing, hardening, forging, melting and production-line integration. Frequency and power matched to your part and process.",
   alternates: { canonical: siteConfig.site_domain },
 };
@@ -40,13 +40,13 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-orange-400/40 bg-orange-400/10 px-4 py-2 text-xs font-semibold tracking-[.18em] text-orange-300"><Sparkles className="h-4 w-4" /> 5TH-GENERATION · FULLY DIGITAL · IN-HOUSE R&amp;D</div>
             <h1 className="text-5xl font-semibold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-[5.25rem]">Heat exactly where<span className="block bg-gradient-to-r from-orange-400 to-amber-200 bg-clip-text text-transparent">your process needs it.</span></h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">Our self-developed, fully digital induction heating power supplies combine precise process control with real-time power and energy tracking—from precision brazing to 1000 kW production lines.</p>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">Our self-developed, fully digital induction heating power supplies combine precise process control with real-time power and energy tracking—from precision brazing to engineered 2000 kW production systems.</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="#quote" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-orange-500 px-7 font-semibold text-slate-950 transition hover:bg-orange-400">Discuss your heating project <ArrowRight className="h-5 w-5" /></Link>
               <Link href="#products" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md border border-white/25 bg-white/5 px-7 font-semibold text-white backdrop-blur transition hover:bg-white/10">Explore our products <ChevronRight className="h-5 w-5" /></Link>
             </div>
             <div className="mt-10 grid w-full max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-4">
-              {[["0.1–1000", "kHz frequency"], ["20–1000", "kW power"], ["25+", "years R&D"], ["100+", "complete system"]].map(([value, label]) => <div key={label} className="bg-slate-950/75 px-5 py-4 backdrop-blur"><div className="text-xl font-semibold text-white">{value}</div><div className="mt-1 text-xs uppercase tracking-wider text-slate-400">{label}</div></div>)}
+              {[["0.1–1000", "kHz frequency"], ["Up to 2000", "kW engineered"], ["25+", "years R&D"], ["100+", "complete system"]].map(([value, label]) => <div key={label} className="bg-slate-950/75 px-5 py-4 backdrop-blur"><div className="text-xl font-semibold text-white">{value}</div><div className="mt-1 text-xs uppercase tracking-wider text-slate-400">{label}</div></div>)}
             </div>
           </div>
         </div>

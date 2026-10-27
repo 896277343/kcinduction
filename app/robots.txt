@@ -7,7 +7,6 @@ Sitemap: https://www.kc-induction.com/sitemap.xml
 # Disallow specific paths
 Disallow: /admin/
 Disallow: /api/
-Disallow: /_next/
 Disallow: /__nextjs_placeholder__/
 Disallow: /next.svg
 Disallow: /vercel.svg

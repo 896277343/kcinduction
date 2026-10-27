@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@source "../components";
+@source "../lib";
 
 @utility container {
     margin-inline: auto;
