@@ -54,7 +54,7 @@ export default async function ContactPage({ searchParams }: { searchParams?: Pro
             <input type="hidden" name="product_slug" value="induction-heating-solution" />
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <label className="text-sm font-semibold text-slate-700">Your name <span className="text-orange-600">*</span><input type="text" name="name" required autoComplete="name" className={fieldClass} placeholder="Your name" /></label>
+              <label className="text-sm font-semibold text-slate-700">Your name <span className="font-normal text-slate-500">(optional)</span><input type="text" name="name" autoComplete="name" className={fieldClass} placeholder="Your name" /></label>
               <label className="text-sm font-semibold text-slate-700">Business email <span className="text-orange-600">*</span><input type="email" name="email" required autoComplete="email" className={fieldClass} placeholder="name@company.com" /></label>
               <label className="text-sm font-semibold text-slate-700">Company<input type="text" name="company" autoComplete="organization" className={fieldClass} placeholder="Company name" /></label>
               <label className="text-sm font-semibold text-slate-700">Country / region<input type="text" name="country" autoComplete="country-name" className={fieldClass} placeholder="Country or region" /></label>

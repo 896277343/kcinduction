@@ -20,7 +20,7 @@ const imageHostnames = Array.from(
 );
 
 const nextConfig: NextConfig = {
-  distDir: ".next-local",
+  distDir: process.env.KC_BUILD_DIR || ".next-local",
   output: "standalone",
   images: {
     remotePatterns: imageHostnames.map((hostname) => ({

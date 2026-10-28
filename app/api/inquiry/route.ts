@@ -39,6 +39,10 @@ export async function POST(request: NextRequest) {
     if (typeof value === "string") payload.append(key, value);
   }
 
+  // The receiving system historically expects a name. Keep the field optional
+  // for visitors while giving that legacy field a clear placeholder.
+  if (!payload.get("name")?.trim()) payload.set("name", "Not provided");
+
   try {
     const response = await fetch(INQUIRY_ENDPOINT, {
       method: "POST",
@@ -47,7 +51,10 @@ export async function POST(request: NextRequest) {
       cache: "no-store",
     });
 
-    if (!response.ok) throw new Error(`Inquiry request failed with status ${response.status}`);
+    const responseBody = (await response.text()).trim();
+    if (!response.ok || /restricted access|access denied|forbidden/i.test(responseBody)) {
+      throw new Error(`Inquiry endpoint rejected request (HTTP ${response.status}): ${responseBody.slice(0, 120)}`);
+    }
 
     const redirectUrl = new URL(successPath, SITE_ORIGIN);
     redirectUrl.searchParams.set("status", "success");
