@@ -8,6 +8,12 @@ import { siteConfig } from "@/site.config";
 
 import type { Metadata } from "next";
 
+// Always revalidate page HTML at the server. Versioned Next.js assets and
+// public images keep their own long-lived cache headers, but customers should
+// never be left on an old landing-page document after a deployment.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.site_name,
