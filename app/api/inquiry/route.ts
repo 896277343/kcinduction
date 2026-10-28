@@ -4,6 +4,13 @@ import { siteConfig } from "@/site.config";
 const INQUIRY_ENDPOINT = "https://inquiry.sf6sf6.com/updata_ppc.php";
 const SITE_ORIGIN = siteConfig.site_domain.replace(/\/$/, "");
 
+function redirectOrigin(request: NextRequest) {
+  const hostname = request.nextUrl.hostname;
+  return hostname === "localhost" || hostname === "127.0.0.1"
+    ? request.nextUrl.origin
+    : SITE_ORIGIN;
+}
+
 function firstValue(value: FormDataEntryValue | null): string {
   return typeof value === "string" ? value : "";
 }
@@ -56,14 +63,14 @@ export async function POST(request: NextRequest) {
       throw new Error(`Inquiry endpoint rejected request (HTTP ${response.status}): ${responseBody.slice(0, 120)}`);
     }
 
-    const redirectUrl = new URL(successPath, SITE_ORIGIN);
+    const redirectUrl = new URL(successPath, redirectOrigin(request));
     redirectUrl.searchParams.set("status", "success");
     if (productName) redirectUrl.searchParams.set("product", productName);
     if (productSlug) redirectUrl.searchParams.set("product_slug", productSlug);
     return NextResponse.redirect(redirectUrl, { status: 303 });
   } catch (error) {
     console.error("Inquiry submission failed:", error);
-    const redirectUrl = new URL(failurePath, SITE_ORIGIN);
+    const redirectUrl = new URL(failurePath, redirectOrigin(request));
     redirectUrl.searchParams.set("status", "error");
     if (productName) redirectUrl.searchParams.set("product", productName);
     if (productSlug) redirectUrl.searchParams.set("product_slug", productSlug);
