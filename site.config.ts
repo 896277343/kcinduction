@@ -25,7 +25,7 @@ type SiteConfig = {
 export const siteConfig: SiteConfig = {
   site_name: "KC Induction",
   site_description: "Self-developed fifth-generation digital induction heating power supplies from 0.1 to 1000 kHz, with engineered systems up to 2000 kW and real-time power and energy tracking.",
-  site_domain: "https://kcinduction.com",
+  site_domain: "https://kc-induction.com",
   brand: {
     legalName: "Zhengzhou Kechuang Electronics Co., Ltd.",
     logoPath: "/images/kc/logo-color-dark.webp",

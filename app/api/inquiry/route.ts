@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isIP } from "node:net";
+import { siteConfig } from "@/site.config";
 
 const INQUIRY_ENDPOINT = "https://inquiry.sf6sf6.com/updata_ppc.php";
 
@@ -8,7 +9,7 @@ function firstValue(value: FormDataEntryValue | null): string {
 }
 
 function sanitizePath(path: string, fallback: string) {
-  if (!path || !path.startsWith("/")) {
+  if (!path || !path.startsWith("/") || path.startsWith("//") || path.includes("\\")) {
     return fallback;
   }
 
@@ -75,14 +76,14 @@ export async function POST(request: NextRequest) {
       throw new Error(`Inquiry endpoint rejected request (HTTP ${response.status}, result ${resultCode ?? "missing"}): ${responseBody.slice(0, 120)}`);
     }
 
-    const redirectUrl = new URL(successPath, request.url);
+    const redirectUrl = new URL(successPath, siteConfig.site_domain);
     redirectUrl.searchParams.set("status", "success");
     if (productName) redirectUrl.searchParams.set("product", productName);
     if (productSlug) redirectUrl.searchParams.set("product_slug", productSlug);
     return NextResponse.redirect(redirectUrl, { status: 303 });
   } catch (error) {
     console.error("Inquiry submission failed:", error);
-    const redirectUrl = new URL(failurePath, request.url);
+    const redirectUrl = new URL(failurePath, siteConfig.site_domain);
     redirectUrl.searchParams.set("status", "error");
     if (failureReason) redirectUrl.searchParams.set("reason", failureReason);
     if (productName) redirectUrl.searchParams.set("product", productName);

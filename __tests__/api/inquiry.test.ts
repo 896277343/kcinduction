@@ -34,7 +34,7 @@ describe("inquiry submission", () => {
     const response = await POST(inquiryRequest());
 
     expect(response.status).toBe(303);
-    expect(response.headers.get("location")).toContain("http://localhost:3010/inquiry/success?status=success");
+    expect(response.headers.get("location")).toContain("https://kc-induction.com/inquiry/success?status=success");
     const init = fetchMock.mock.calls[0][1] as RequestInit;
     expect(new Headers(init.headers).get("X-Requested-With")).toBe("XMLHttpRequest");
     expect(new Headers(init.headers).get("User-Agent")).toBe("Test Browser");
@@ -50,7 +50,7 @@ describe("inquiry submission", () => {
 
     const response = await POST(inquiryRequest());
 
-    expect(response.headers.get("location")).toContain("http://localhost:3010/inquiry/success?status=error");
+    expect(response.headers.get("location")).toContain("https://kc-induction.com/inquiry/success?status=error");
   });
 
   it("passes the content-length rejection back to the visitor", async () => {
