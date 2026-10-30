@@ -12,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/",
     "/about",
     "/contact",
+    "/privacy-policy",
     "/products",
     "/medium-frequency-induction-power-supply",
     "/ultrasonic-frequency-induction-power-supply",

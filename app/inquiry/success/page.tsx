@@ -33,9 +33,6 @@ export default async function InquirySuccessPage({
   const product = Array.isArray(resolvedSearchParams?.product)
     ? resolvedSearchParams?.product[0]
     : resolvedSearchParams?.product;
-  const productSlug = Array.isArray(resolvedSearchParams?.product_slug)
-    ? resolvedSearchParams?.product_slug[0]
-    : resolvedSearchParams?.product_slug;
   const status = Array.isArray(resolvedSearchParams?.status)
     ? resolvedSearchParams?.status[0]
     : resolvedSearchParams?.status;
@@ -83,15 +80,9 @@ export default async function InquirySuccessPage({
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            {productSlug ? (
-              <Button asChild className="bg-orange-500 text-slate-950 hover:bg-orange-400">
-                <Link href={`/products/${productSlug}`}>Back to {product ?? "Product"}</Link>
-              </Button>
-            ) : (
-              <Button asChild className="bg-orange-500 text-slate-950 hover:bg-orange-400">
-                <Link href="/products">Back to Products</Link>
-              </Button>
-            )}
+            <Button asChild className="bg-orange-500 text-slate-950 hover:bg-orange-400">
+              <Link href="/products">Explore Power Supplies</Link>
+            </Button>
             <Button asChild variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
               <Link href="/products">Continue Browsing</Link>
             </Button>

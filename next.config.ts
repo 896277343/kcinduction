@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { legacyRedirects } from "./lib/legacy-redirects";
 
 const wordpressHostname = process.env.WORDPRESS_HOSTNAME;
 const wordpressUrl = process.env.WORDPRESS_URL;
@@ -32,11 +33,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/medium-frequency", destination: "/products#frequency", permanent: false },
-      { source: "/induction-heat-treatment-system", destination: "/solutions", permanent: false },
-      { source: "/product/automatic-induction-forging-equipment", destination: "/induction-forging-equipment", permanent: true },
-      { source: "/product/induction-pipe-bending-machine", destination: "/induction-pipe-bending-machine", permanent: true },
-      { source: "/quenching-and-tempering-system", destination: "/induction-hardening-machine", permanent: true },
+      ...legacyRedirects,
       { source: "/products/sf6-leak-detector", destination: "/products", permanent: true },
       { source: "/products/sf6-room-monitor", destination: "/products", permanent: true },
       { source: "/products/sf6-gas-analyzer", destination: "/products", permanent: true },

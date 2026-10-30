@@ -51,7 +51,6 @@ export default async function ContactPage({ searchParams }: { searchParams?: Pro
             <input type="hidden" name="landing_page" value={inquirySource} />
             <input type="hidden" name="success_path" value="/inquiry/success" />
             <input type="hidden" name="failure_path" value="/inquiry/success" />
-            <input type="hidden" name="product_slug" value="induction-heating-solution" />
 
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="text-sm font-semibold text-slate-700">Your name <span className="font-normal text-slate-500">(optional)</span><input type="text" name="name" minLength={2} maxLength={30} autoComplete="name" className={fieldClass} placeholder="Your name" /></label>
@@ -66,7 +65,7 @@ export default async function ContactPage({ searchParams }: { searchParams?: Pro
 
             <label className="block text-sm font-semibold text-slate-700">Project details <span className="text-orange-600">*</span><textarea name="content" required minLength={5} maxLength={2000} rows={7} defaultValue={message} className={`${fieldClass} min-h-44 py-3 leading-7`} placeholder="Material, part dimensions, heating area, target temperature, cycle time and production rate..." /><span className="mt-2 block text-xs font-normal text-slate-500">5–2000 characters. Please describe the heating requirement rather than pasting a link.</span></label>
 
-            <label className="flex items-start gap-3 text-sm leading-6 text-slate-600"><input type="checkbox" name="consent" value="yes" required className="mt-1 h-4 w-4 accent-orange-500" /><span>I agree that KC Induction may use these details to respond to my inquiry.</span></label>
+            <label className="flex items-start gap-3 text-sm leading-6 text-slate-600"><input type="checkbox" name="consent" value="yes" required className="mt-1 h-4 w-4 accent-orange-500" /><span>I agree that KC Induction may use these details to respond to my inquiry. See our <Link href="/privacy-policy" className="font-semibold text-orange-700 underline">Privacy Policy</Link>.</span></label>
 
             <button type="submit" className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-md bg-orange-500 px-7 font-semibold text-slate-950 transition hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"><MessageSquare className="h-5 w-5" />Send inquiry</button>
           </form>

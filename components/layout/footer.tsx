@@ -57,6 +57,7 @@ export function Footer() {
             &copy; {siteConfig.footer.copyrightName}. All rights reserved.{" "}
             {siteConfig.footer.copyrightYears}.
           </p>
+          <Link href="/privacy-policy" className="text-sm hover:underline underline-offset-4">Privacy Policy</Link>
         </Container>
       </Section>
     </footer>
