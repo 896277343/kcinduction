@@ -23,6 +23,23 @@ const imageHostnames = Array.from(
 const nextConfig: NextConfig = {
   distDir: process.env.KC_BUILD_DIR || ".next-local",
   output: "standalone",
+  async headers() {
+    return [
+      {
+        // Only ordinary, anonymous homepage documents are candidates for the
+        // short Cloudflare edge-cache experiment. RSC and cookie-bearing
+        // responses must keep their normal Next.js cache behavior.
+        source: "/",
+        missing: [
+          { type: "header", key: "rsc" },
+          { type: "header", key: "cookie" },
+        ],
+        headers: [
+          { key: "Cloudflare-CDN-Cache-Control", value: "public, max-age=120" },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: imageHostnames.map((hostname) => ({
       protocol: "https",
