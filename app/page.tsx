@@ -132,6 +132,37 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-y border-slate-200 bg-[#f3f1ea] py-20 text-slate-950 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="mb-10 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="section-kicker">BUILT HERE · OPEN TO INSPECTION</p>
+              <h2 className="section-title mt-4">See inside our induction heating systems.</h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">A finished cabinet is only part of the story. These are real KC units, assembled in our factory—from the power components and wiring to our own control board.</p>
+            </div>
+            <Link href="/why-us" className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 self-start rounded-md bg-slate-950 px-6 font-semibold text-white transition hover:bg-slate-800 lg:self-auto">See how we build <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-12">
+            <figure className="relative h-[420px] overflow-hidden rounded-2xl bg-slate-900 lg:col-span-5 lg:row-span-2 lg:h-auto">
+              <Image src="/images/kc/home/factory-proof/open-cabinet.webp" alt="Open KC induction heating cabinet showing the internal power and control assemblies" fill className="object-cover object-center" sizes="(min-width:1024px) 42vw,100vw" />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-5 pb-5 pt-16 text-sm font-semibold text-white">01 · Inside the cabinet</figcaption>
+            </figure>
+            <div className="grid gap-4 sm:grid-cols-3 lg:col-span-7">
+              {[
+                { image: "power-components.webp", alt: "KC induction heating cabinet power components and connections", label: "Power components" },
+                { image: "electrical-layout.webp", alt: "KC induction heating cabinet electrical layout and wiring", label: "Electrical layout" },
+                { image: "control-board.webp", alt: "KC-developed induction heating control board inside the cabinet", label: "KC control board" },
+              ].map((detail, index) => <figure key={detail.image} className="relative h-[210px] overflow-hidden rounded-2xl bg-slate-900 sm:h-[240px] lg:h-[230px]"><Image src={`/images/kc/home/factory-proof/${detail.image}`} alt={detail.alt} fill className="object-cover object-center" sizes="(min-width:1024px) 19vw,(min-width:640px) 33vw,100vw" /><figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-4 pt-12 text-xs font-semibold text-white">0{index + 2} · {detail.label}</figcaption></figure>)}
+            </div>
+            <figure className="relative h-[280px] overflow-hidden rounded-2xl bg-slate-900 sm:h-[390px] lg:col-span-7 lg:h-[360px]">
+              <Image src="/images/kc/home/factory-proof/finished-system.webp" alt="Finished KC fifth-generation induction heating cabinet on the factory floor" fill className="object-cover object-center" sizes="(min-width:1024px) 58vw,100vw" />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-5 pb-5 pt-16 text-sm font-semibold text-white">05 · Finished system</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white py-24 text-slate-950">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:px-10">
           <div className="relative min-h-[520px] overflow-hidden rounded-2xl"><Image src="/images/kc/factory.jpg" alt="KC Induction manufacturing and engineering facility" fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" /><div className="absolute bottom-5 left-5 right-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/25 shadow-2xl backdrop-blur-md"><div className="bg-slate-950/85 p-5 text-white"><div className="text-2xl font-semibold">Complete line</div><div className="mt-1 text-xs text-slate-300">Power · coil · cooling · automation</div></div><div className="bg-orange-500/90 p-5 text-slate-950"><div className="text-2xl font-semibold">Factory direct</div><div className="mt-1 text-xs">Engineering through commissioning</div></div></div></div>

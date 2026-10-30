@@ -1,15 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { siteConfig } from "@/site.config";
+import { isIP } from "node:net";
 
 const INQUIRY_ENDPOINT = "https://inquiry.sf6sf6.com/updata_ppc.php";
-const SITE_ORIGIN = siteConfig.site_domain.replace(/\/$/, "");
-
-function redirectOrigin(request: NextRequest) {
-  const hostname = request.nextUrl.hostname;
-  return hostname === "localhost" || hostname === "127.0.0.1"
-    ? request.nextUrl.origin
-    : SITE_ORIGIN;
-}
 
 function firstValue(value: FormDataEntryValue | null): string {
   return typeof value === "string" ? value : "";
@@ -50,28 +42,49 @@ export async function POST(request: NextRequest) {
   // for visitors while giving that legacy field a clear placeholder.
   if (!payload.get("name")?.trim()) payload.set("name", "Not provided");
 
+  // The inquiry system uses these values for its spam classification. Without
+  // forwarding them, every visitor looks like the same Node.js proxy process.
+  const headers: Record<string, string> = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "X-Requested-With": "XMLHttpRequest",
+  };
+  const userAgent = request.headers.get("user-agent");
+  const language = request.headers.get("accept-language");
+  const forwardedIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  if (userAgent) headers["User-Agent"] = userAgent.slice(0, 512);
+  if (language) headers["Accept-Language"] = language.slice(0, 256);
+  if (forwardedIp && isIP(forwardedIp) && forwardedIp !== "::1" && forwardedIp !== "127.0.0.1") {
+    headers["X-Forwarded-For"] = forwardedIp;
+  }
+
+  let failureReason = "";
   try {
     const response = await fetch(INQUIRY_ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers,
       body: payload.toString(),
       cache: "no-store",
     });
 
     const responseBody = (await response.text()).trim();
-    if (!response.ok || /restricted access|access denied|forbidden/i.test(responseBody)) {
-      throw new Error(`Inquiry endpoint rejected request (HTTP ${response.status}): ${responseBody.slice(0, 120)}`);
+    const resultCode = response.headers.get("x-ray-code");
+    if (!response.ok || resultCode !== "Success") {
+      if (/content field length/i.test(responseBody)) failureReason = "content_length";
+      else if (/content can not contain links/i.test(responseBody)) failureReason = "content_link";
+      else if (/username field length/i.test(responseBody)) failureReason = "name_length";
+      throw new Error(`Inquiry endpoint rejected request (HTTP ${response.status}, result ${resultCode ?? "missing"}): ${responseBody.slice(0, 120)}`);
     }
 
-    const redirectUrl = new URL(successPath, redirectOrigin(request));
+    const redirectUrl = new URL(successPath, request.url);
     redirectUrl.searchParams.set("status", "success");
     if (productName) redirectUrl.searchParams.set("product", productName);
     if (productSlug) redirectUrl.searchParams.set("product_slug", productSlug);
     return NextResponse.redirect(redirectUrl, { status: 303 });
   } catch (error) {
     console.error("Inquiry submission failed:", error);
-    const redirectUrl = new URL(failurePath, redirectOrigin(request));
+    const redirectUrl = new URL(failurePath, request.url);
     redirectUrl.searchParams.set("status", "error");
+    if (failureReason) redirectUrl.searchParams.set("reason", failureReason);
     if (productName) redirectUrl.searchParams.set("product", productName);
     if (productSlug) redirectUrl.searchParams.set("product_slug", productSlug);
     return NextResponse.redirect(redirectUrl, { status: 303 });

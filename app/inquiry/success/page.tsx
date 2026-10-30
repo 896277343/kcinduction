@@ -9,6 +9,7 @@ type SuccessPageProps = {
     product?: string | string[];
     product_slug?: string | string[];
     status?: string | string[];
+    reason?: string | string[];
   }>;
 };
 
@@ -38,7 +39,17 @@ export default async function InquirySuccessPage({
   const status = Array.isArray(resolvedSearchParams?.status)
     ? resolvedSearchParams?.status[0]
     : resolvedSearchParams?.status;
-  const isSuccess = status !== "error";
+  const reason = Array.isArray(resolvedSearchParams?.reason)
+    ? resolvedSearchParams?.reason[0]
+    : resolvedSearchParams?.reason;
+  const isSuccess = status === "success";
+  const failureMessage = reason === "content_length"
+    ? "Project details must contain 5–2000 characters. Please shorten or expand your message and submit it again."
+    : reason === "content_link"
+      ? "The inquiry system does not accept links in project details. Please remove the link and submit again."
+      : reason === "name_length"
+        ? "If you provide a name, it must contain 2–30 characters. You may also leave it blank."
+        : null;
 
   return (
     <div className="min-h-screen bg-[#07111b] py-24 text-white">
@@ -55,9 +66,9 @@ export default async function InquirySuccessPage({
               ? product
                 ? `Your request for ${product} has been submitted successfully. Our team will review it and get back to you soon.`
                 : "Your request has been submitted successfully. Our team will review it and get back to you soon."
-              : product
+              : failureMessage ?? (product
                 ? `We could not submit your request for ${product} just now. Please go back and try again, or contact us directly by email or phone.`
-                : "We could not submit your request just now. Please go back and try again, or contact us directly by email or phone."}
+                : "We could not submit your request just now. Please go back and try again, or contact us directly by email or phone.")}
           </p>
 
           <div className="grid gap-4 rounded-xl border border-white/10 bg-white/[.04] p-5 text-sm text-slate-300 sm:grid-cols-2">
