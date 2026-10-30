@@ -27,7 +27,7 @@ try {
         if ([int]$_.Exception.Response.StatusCode -ne 404) { throw }
     }
 
-    $currentRules = if ($ruleset) { @($ruleset.rules) } else { @() }
+    $currentRules = @($ruleset.rules | Where-Object { $null -ne $_ })
     $matching = @($currentRules | Where-Object { $_.description -eq $description -and $_.expression -eq $expression })
     Write-Output "Action: $Action"
     Write-Output "Existing cache rule count: $($currentRules.Count)"
@@ -51,7 +51,10 @@ try {
             expression = $expression
             description = $description
             action = 'set_cache_settings'
-            action_parameters = @{ cache = $true }
+            action_parameters = @{
+                cache = $true
+                browser_ttl = @{ mode = 'respect_origin' }
+            }
             enabled = $true
         }
         if ($ruleset) {
@@ -68,7 +71,7 @@ try {
         }
         $created = Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -ContentType 'application/json' -Body $body
         if (-not $created.success) { throw 'Cloudflare did not confirm rule creation.' }
-        Write-Output 'Created one homepage-only Cache Rule without an Edge TTL override.'
+        Write-Output 'Created one homepage-only Cache Rule without an Edge TTL override, with Browser TTL respecting origin.'
         Write-Output "Ruleset ID: $($created.result.id)"
         return
     }
