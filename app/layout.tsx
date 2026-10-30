@@ -1,4 +1,5 @@
 import React from "react";
+import Script from "next/script";
 import "./globals.css";
 
 import { Nav } from "@/components/layout/nav";
@@ -66,6 +67,18 @@ export default function RootLayout({
         <Nav />
         <main id="main-content">{children}</main>
         <Footer />
+        <Script id="tawk-to-live-chat" strategy="afterInteractive">{`
+          var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+          (function () {
+            var s1 = document.createElement('script');
+            var s0 = document.getElementsByTagName('script')[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/67ce8e9cec6c18190fe222e8/1ilvdq5e0';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+          })();
+        `}</Script>
       </body>
     </html>
   );
