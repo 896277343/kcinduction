@@ -52,6 +52,9 @@ const legacyPaths: Record<string, string> = {
   "/product/ball-stud-induction-hardening-machine": "/induction-hardening-machine",
   "/product/quenching-the-inner-wall-of-concrete-pump-pipe": "/induction-pipe-heating",
   "/product/30kw-all-in-one-induction-brazing-machine": "/induction-brazing-system",
+  "/product-category/induction-forging-system": "/induction-forging-equipment",
+  "/product-category/quenching-and-tempering-system": "/induction-hardening-machine",
+  "/product-category/induction-brazing-system": "/induction-brazing-system",
 };
 
 const modelGroups: Record<string, string[]> = {
