@@ -1,19 +1,14 @@
 import { MetadataRoute } from "next";
-import { getAllPages, getAllPostsForSitemap } from "@/lib/wordpress";
 import { siteConfig } from "@/site.config";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, pages] = await Promise.all([
-    getAllPostsForSitemap(),
-    getAllPages(),
-  ]);
-
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "/",
     "/about",
     "/contact",
     "/privacy-policy",
     "/products",
+    "/why-us",
     "/medium-frequency-induction-power-supply",
     "/ultrasonic-frequency-induction-power-supply",
     "/high-frequency-induction-power-supply",
@@ -28,7 +23,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/induction-hardening-machine",
     "/induction-brazing-system",
     "/induction-heating-system-comparison",
-    "/posts",
   ] as const;
 
   const staticLastModifiedMap: Partial<Record<(typeof staticPaths)[number], string>> = {
@@ -36,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/about": "2026-05-10",
     "/contact": "2026-05-10",
     "/products": "2026-05-10",
+    "/why-us": "2026-11-03",
     "/medium-frequency-induction-power-supply": "2026-10-26",
     "/ultrasonic-frequency-induction-power-supply": "2026-10-26",
     "/high-frequency-induction-power-supply": "2026-10-26",
@@ -50,18 +45,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/induction-hardening-machine": "2026-10-15",
     "/induction-brazing-system": "2026-10-15",
     "/induction-heating-system-comparison": "2026-10-15",
-    "/posts": "2026-05-10",
   };
 
   const staticUrls: MetadataRoute.Sitemap = staticPaths.map((path) => ({
     url: `${siteConfig.site_domain}${path === "/" ? "" : path}`,
     lastModified: new Date(staticLastModifiedMap[path] ?? "2026-05-10"),
-    changeFrequency:
-      path === "/"
-        ? "monthly"
-        : path.startsWith("/posts")
-          ? "weekly"
-          : "monthly",
+    changeFrequency: "monthly",
     priority:
       path === "/"
         ? 1
@@ -72,19 +61,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             : 0.7,
   }));
 
-  const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${siteConfig.site_domain}/posts/${post.slug}`,
-    lastModified: new Date(post.modified),
-    changeFrequency: "weekly",
-    priority: 0.5,
-  }));
-
-  const pageUrls: MetadataRoute.Sitemap = pages.map((page) => ({
-    url: `${siteConfig.site_domain}/pages/${page.slug}`,
-    lastModified: new Date(page.modified || page.date),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  return [...staticUrls, ...postUrls, ...pageUrls];
+  return staticUrls;
 }

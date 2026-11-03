@@ -50,6 +50,12 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "kc-induction.com" }],
+        destination: "https://www.kc-induction.com/:path*",
+        statusCode: 301,
+      },
       ...legacyRedirects,
       { source: "/products/sf6-leak-detector", destination: "/products", permanent: true },
       { source: "/products/sf6-room-monitor", destination: "/products", permanent: true },

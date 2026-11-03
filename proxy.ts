@@ -2,9 +2,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const protectedRoutes = ["/admin"];
+const removedContentRoutes = ["/posts", "/pages"];
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  if (removedContentRoutes.some((route) => pathname === route || pathname.startsWith(`${route}/`))) {
+    return new NextResponse("This legacy content is no longer available.", {
+      status: 410,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Cache-Control": "public, max-age=300",
+      },
+    });
+  }
 
   if (pathname === "/admin/login") {
     return NextResponse.next();
@@ -24,5 +36,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/posts/:path*", "/pages/:path*"],
 };
