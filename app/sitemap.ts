@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { siteConfig } from "@/site.config";
+import { getPublishedLocales, localizePath } from "@/lib/i18n/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
@@ -47,19 +48,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/induction-heating-system-comparison": "2026-10-15",
   };
 
-  const staticUrls: MetadataRoute.Sitemap = staticPaths.map((path) => ({
-    url: `${siteConfig.site_domain}${path === "/" ? "" : path}`,
-    lastModified: new Date(staticLastModifiedMap[path] ?? "2026-05-10"),
-    changeFrequency: "monthly",
-    priority:
-      path === "/"
-        ? 1
-        : path === "/products" || path === "/solutions"
-          ? 0.9
-          : path.startsWith("/products/") || path.includes("induction-")
-            ? 0.8
-            : 0.7,
-  }));
+  const staticUrls: MetadataRoute.Sitemap = getPublishedLocales().flatMap((locale) =>
+    staticPaths.map((path) => ({
+      url: `${siteConfig.site_domain}${localizePath(path, locale) === "/" ? "" : localizePath(path, locale)}`,
+      lastModified: new Date(staticLastModifiedMap[path] ?? "2026-05-10"),
+      changeFrequency: "monthly" as const,
+      priority:
+        path === "/"
+          ? 1
+          : path === "/products" || path === "/solutions"
+            ? 0.9
+            : path.startsWith("/products/") || path.includes("induction-")
+              ? 0.8
+              : 0.7,
+    }))
+  );
 
   return staticUrls;
 }

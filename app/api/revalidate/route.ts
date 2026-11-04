@@ -1,5 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { getPublishedLocales } from "@/lib/i18n/config";
 
 export const maxDuration = 30;
 
@@ -40,6 +41,9 @@ export async function POST(request: NextRequest) {
 
       // Revalidate specific content type tags
       revalidateTag("wordpress", { expire: 0 });
+      for (const locale of getPublishedLocales()) {
+        revalidateTag(`transposh-${locale}`, { expire: 0 });
+      }
 
       if (contentType === "post") {
         revalidateTag("posts", { expire: 0 });

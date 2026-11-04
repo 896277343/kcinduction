@@ -9,7 +9,7 @@ describe("legacy WordPress redirects", () => {
     for (const redirect of legacyRedirects) {
       expect(redirect.permanent).toBe(true);
       expect(redirect.destination.startsWith("/")).toBe(true);
-      expect(existsSync(join(process.cwd(), "app", redirect.destination, "page.tsx"))).toBe(true);
+      expect(existsSync(join(process.cwd(), "app", "[locale]", redirect.destination, "page.tsx"))).toBe(true);
     }
   });
 

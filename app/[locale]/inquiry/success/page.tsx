@@ -1,0 +1,99 @@
+
+import { T, TV } from "@/components/i18n/text";
+import Link from "@/components/i18n/link";
+import type { Metadata } from "next";
+
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/site.config";
+
+type SuccessPageProps = {
+  searchParams?: Promise<{
+    product?: string | string[];
+    product_slug?: string | string[];
+    status?: string | string[];
+    reason?: string | string[];
+  }>;
+};
+
+export const metadata: Metadata = {
+  title: `Inquiry Status | ${siteConfig.site_name}`,
+  description:
+    "View the status of your induction heating solution inquiry.",
+  alternates: {
+    canonical: `${siteConfig.site_domain}/inquiry/success`,
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
+export default async function InquirySuccessPage({
+  searchParams,
+}: SuccessPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const product = Array.isArray(resolvedSearchParams?.product)
+    ? resolvedSearchParams?.product[0]
+    : resolvedSearchParams?.product;
+  const status = Array.isArray(resolvedSearchParams?.status)
+    ? resolvedSearchParams?.status[0]
+    : resolvedSearchParams?.status;
+  const reason = Array.isArray(resolvedSearchParams?.reason)
+    ? resolvedSearchParams?.reason[0]
+    : resolvedSearchParams?.reason;
+  const isSuccess = status === "success";
+  const failureMessage = reason === "content_length"
+    ? "Project details must contain 5–2000 characters. Please shorten or expand your message and submit it again."
+    : reason === "content_link"
+      ? "The inquiry system does not accept links in project details. Please remove the link and submit again."
+      : reason === "name_length"
+        ? "If you provide a name, it must contain 2–30 characters. You may also leave it blank."
+        : null;
+
+  return (
+    <div className="min-h-screen bg-[#07111b] py-24 text-white">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-2xl border border-white/10 bg-[#0b1825] p-8 shadow-2xl sm:p-10">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-orange-300">
+            <T id="0d4768c5ab5f3ae5" /> {isSuccess ? "Received" : "Needs Attention"}
+          </p>
+          <h1 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+            {isSuccess ? "Thank you for your inquiry" : "We could not send your inquiry"}
+          </h1>
+          <p className="mb-8 text-base leading-7 text-slate-300 sm:text-lg">
+            {isSuccess
+              ? product
+                ? `Your request for ${product} has been submitted successfully. Our team will review it and get back to you soon.`
+                : "Your request has been submitted successfully. Our team will review it and get back to you soon."
+              : failureMessage ?? (product
+                ? `We could not submit your request for ${product} just now. Please go back and try again, or contact us directly by email or phone.`
+                : "We could not submit your request just now. Please go back and try again, or contact us directly by email or phone.")}
+          </p>
+
+          <div className="grid gap-4 rounded-xl border border-white/10 bg-white/[.04] p-5 text-sm text-slate-300 sm:grid-cols-2">
+            <div>
+              <p className="mb-1 font-semibold text-white"><T id="969ccbd3cf6300ec" /></p>
+              <p>{<TV>{siteConfig.contact.email}</TV>}</p>
+            </div>
+            <div>
+              <p className="mb-1 font-semibold text-white"><T id="63dceb8800b2dd4a" /></p>
+              <p>{<TV>{siteConfig.contact.phone}</TV>}</p>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild className="bg-orange-500 text-slate-950 hover:bg-orange-400">
+              <Link href="/products"><T id="7d124fe2831941af" /></Link>
+            </Button>
+            <Button asChild variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
+              <Link href="/products"><T id="aad4931ec724e331" /></Link>
+            </Button>
+            <Button asChild variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
+              <Link href="/contact"><T id="1ac282f02ec0c8af" /></Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

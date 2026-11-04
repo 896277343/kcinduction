@@ -1,13 +1,15 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { Menu, ArrowRightSquare } from "lucide-react";
 import { useRef } from "react";
 
 import { mainMenu, contentMenu, menuLabel } from "@/menu.config";
 import { siteConfig } from "@/site.config";
+import { useI18n } from "@/components/i18n/provider";
 
 export function MobileNav() {
+  const { t } = useI18n();
   const menuRef = useRef<HTMLDetailsElement>(null);
   const closeMenu = () => {
     if (menuRef.current) menuRef.current.open = false;
@@ -35,7 +37,7 @@ export function MobileNav() {
                   onClick={closeMenu}
                   className="block rounded-md px-2 py-2.5 text-base text-slate-900 hover:bg-slate-50"
                 >
-                  {menuLabel(key)}
+                  {t(key as Parameters<typeof t>[0]) || menuLabel(key)}
                 </Link>
               ))}
             </div>
@@ -50,7 +52,7 @@ export function MobileNav() {
                   onClick={closeMenu}
                   className="block rounded-md px-2 py-2.5 text-base text-slate-900 hover:bg-slate-50"
                 >
-                  {menuLabel(key)}
+                  {t(key as Parameters<typeof t>[0]) || menuLabel(key)}
                 </Link>
               ))}
             </div>

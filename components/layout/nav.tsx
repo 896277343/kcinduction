@@ -1,10 +1,14 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { mainMenu, menuLabel } from "@/menu.config";
 import { siteConfig } from "@/site.config";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { MobileNav } from "@/components/nav/mobile-nav";
+import { LanguageSwitcher } from "@/components/i18n/language-switcher";
+import { useI18n } from "@/components/i18n/provider";
 
 interface NavProps {
   className?: string;
@@ -13,6 +17,7 @@ interface NavProps {
 }
 
 export function Nav({ className, children, id }: NavProps) {
+  const { t } = useI18n();
   return (
     <nav
       className={cn("z-50 bg-[#07111b] text-white md:sticky md:top-0", "border-b border-white/10", className)}
@@ -42,14 +47,15 @@ export function Nav({ className, children, id }: NavProps) {
             {Object.entries(mainMenu).map(([key, href]) => (
               <Button key={href} asChild variant="ghost" size="sm">
                 <Link href={href}>
-                  {menuLabel(key)}
+                  {t(key as Parameters<typeof t>[0]) || menuLabel(key)}
                 </Link>
               </Button>
             ))}
           </div>
           <Button asChild size="lg" className="hidden bg-orange-500 text-slate-950 hover:bg-orange-400 sm:flex">
-            <Link href="/#quote">Discuss your project</Link>
+            <Link href="/#quote">{t("discuss")}</Link>
           </Button>
+          <LanguageSwitcher />
           <MobileNav />
         </div>
       </div>
