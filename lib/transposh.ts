@@ -19,7 +19,7 @@ export async function translateStrings(strings: string[], locale: Locale): Promi
     const response = await fetch(`${apiBase}/wp-json/transposh/v1/translate`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Transposh-Key": apiSecret },
-      body: JSON.stringify({ source_language: defaultLocale, language: locale, strings: nonEmpty.map(({ value }) => value) }),
+      body: JSON.stringify({ source_language: defaultLocale, language: locale, format: "text", strings: nonEmpty.map(({ value }) => value) }),
       cache: "force-cache",
       next: { revalidate: 86400, tags: [`transposh-${locale}`] },
       signal: AbortSignal.timeout(65000),
