@@ -40,7 +40,7 @@ export const solutionPages: Record<string, SolutionPage> = {
       { title: "Production integration", copy: "Connect the heating station with conveyors, robots, presses, quench systems and PLCs." },
     ],
     processTitle: "Sized for production—not selected from a catalogue alone.",
-    processCopy: "High power is useful only when the frequency, coupling, coil geometry and duty cycle are correct. We review the complete load before recommending a cabinet configuration.",
+    processCopy: "High power is useful only when the frequency, coupling, coil geometry and duty cycle are correct. We review the complete load before recommending an induction heating power supply configuration.",
     processImage: "/images/kc/solutions/open-digital-power-supply.webp",
     processAlt: "Open KC digital induction power supply cabinet",
     engineering: [{ label: "Material", value: "Steel, copper, aluminium and other conductive loads" }, { label: "Heat profile", value: "Surface, local or through heating" }, { label: "Duty", value: "Batch, indexed or continuous production" }, { label: "Integration", value: "Standalone, cell or complete line" }],
@@ -236,7 +236,7 @@ export const solutionPages: Record<string, SolutionPage> = {
   "induction-heating-system-comparison": {
     slug: "induction-heating-system-comparison",
     eyebrow: "COMPARE INDUSTRIAL INDUCTION HEATING EQUIPMENT",
-    title: "Compare the engineering behind the cabinet—not just the nameplate.",
+    title: "Compare the engineering behind the induction heating power supply—not just the nameplate.",
     lead: "When evaluating an induction supplier, compare load matching, digital control, component access, process data and application support alongside frequency and rated power.",
     heroImage: "/images/kc/solutions/open-digital-power-supply.webp",
     heroAlt: "Open KC induction heating power supply showing internal engineering",
