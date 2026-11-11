@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { mainMenu, contentMenu, menuLabel } from "@/menu.config";
 import { siteConfig } from "@/site.config";
 import { useI18n } from "@/components/i18n/provider";
+import { T } from "@/components/i18n/text";
 
 export function MobileNav() {
   const { t } = useI18n();
@@ -19,7 +20,7 @@ export function MobileNav() {
     <details ref={menuRef} className="relative md:hidden">
       <summary className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-md border bg-white text-slate-900 marker:content-none">
         <Menu className="h-5 w-5" />
-        <span className="sr-only">Toggle Menu</span>
+        <span className="sr-only"><T id="f2fca5f984057b8d" /></span>
       </summary>
       <div className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[min(20rem,calc(100vw-2rem))] rounded-lg border bg-white p-5 text-slate-900 shadow-xl">
         <Link href="/" onClick={closeMenu} className="flex items-center text-sm font-medium">
@@ -28,7 +29,7 @@ export function MobileNav() {
         </Link>
         <div className="mt-5 space-y-5">
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Menu</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500"><T id="99af6606ff9d6cd5" /></h3>
             <div className="mt-3 space-y-1 border-t pt-3">
               {Object.entries(mainMenu).map(([key, href]) => (
                 <Link

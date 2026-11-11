@@ -6,6 +6,7 @@ import { siteConfig } from "@/site.config";
 import Image from "next/image";
 import Link from "@/components/i18n/link";
 import { useI18n } from "@/components/i18n/provider";
+import { T, TV } from "@/components/i18n/text";
 
 export function Footer() {
   const { t } = useI18n();
@@ -25,9 +26,9 @@ export function Footer() {
               />
             </Link>
             <div className="space-y-3">
-              <p>{siteConfig.site_description}</p>
+              <p><TV>{siteConfig.site_description}</TV></p>
               <p className="text-sm leading-6 text-muted-foreground">
-                {siteConfig.footer.summary}
+                <TV>{siteConfig.footer.summary}</TV>
               </p>
             </div>
           </div>
@@ -61,7 +62,7 @@ export function Footer() {
             &copy; {siteConfig.footer.copyrightName}. {t("rights")}{" "}
             {siteConfig.footer.copyrightYears}.
           </p>
-          <Link href="/privacy-policy" className="text-sm hover:underline underline-offset-4">Privacy Policy</Link>
+          <Link href="/privacy-policy" className="text-sm hover:underline underline-offset-4"><T id="506ff394621596dd" /></Link>
         </Container>
       </Section>
     </footer>
